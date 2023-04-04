@@ -1,0 +1,19 @@
+
+FROM node:lts-alpine
+
+RUN mkdir -p /usr/src/niem-toolbox
+WORKDIR /usr/src/niem-toolbox
+
+# RUN apk update && apk upgrade
+# RUN api add git
+
+COPY . /usr/src/niem-toolbox/
+RUN npm install
+RUN npm run generate
+
+EXPOSE 3000
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+CMD ["npm", "start"]
